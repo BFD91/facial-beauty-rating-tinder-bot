@@ -22,7 +22,7 @@ num_requests = int(input('Input the number of request batches to swipe through (
 FBP_model = keras.models.load_model('model2.h5')
 
 # Creates the 'Tinder photos' folder if we want to save photos and it does not already exist.
-if (not "Tinder photos" in os.listdir(".")) and save_photos:
+if not "Tinder photos" in os.listdir("."):
     os.mkdir("Tinder photos")
     #os.chdir("Tinder photos")
     
@@ -88,16 +88,16 @@ for request_ix in range(num_requests):
                             temp = processedFiles[0]
                             url = (temp['url'])
                             # Retrieve url of photo.
-                            urllib.request.urlretrieve(url, str(person_id)+'_'+str(photo_no)+'.jpg')
-                            im=cv2.imread(str(person_id)+'_'+str(photo_no)+'.jpg')
+                            urllib.request.urlretrieve(url,'Tinder photos/' + str(person_id)+'_'+str(photo_no)+'.jpg')
+                            im=cv2.imread('Tinder photos/' + str(person_id)+'_'+str(photo_no)+'.jpg')
                             try:
                                 processed_images = extract_faces(im)
                             except:
                                 pass
                             i = 0
                             for face in processed_images:
-                                cv2.imwrite(str(person_id)+'_'+str(photo_no)+'_'+str(i)+'.jpg',face)
-                                img=image.load_img(str(person_id)+'_'+str(photo_no)+'_'+str(i)+'.jpg')
+                                cv2.imwrite('Tinder photos/' + str(person_id)+'_'+str(photo_no)+'_'+str(i)+'.jpg',face)
+                                img=image.load_img('Tinder photos/' + str(person_id)+'_'+str(photo_no)+'_'+str(i)+'.jpg')
                                 img=image.img_to_array(img)
                                 # Apply the neural network to predict face beauty.
                                 pred = FBP_model.predict(img.reshape((1,) + img.shape))

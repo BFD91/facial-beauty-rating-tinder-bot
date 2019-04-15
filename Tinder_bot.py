@@ -114,7 +114,7 @@ for request_ix in range(num_requests):
 # Print operation info.
 print(swipes)
 
-# Log operation info. 
+# Operation info is saved to the log.txt file. 
 F = open('log.txt', 'a')
 
 for item in swipes:

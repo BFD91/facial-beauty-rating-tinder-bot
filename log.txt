@@ -1,0 +1,1 @@
+(Tinder profile id, Predicted beauty score, Swiped right?)
